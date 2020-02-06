@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+xgensum -i srcpkgs/ifcopenshell/template
+./xbps-src -f -j4 pkg ifcopenshell

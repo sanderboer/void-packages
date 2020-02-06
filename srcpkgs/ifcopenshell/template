@@ -1,6 +1,6 @@
 # Template file for 'ifcopenshell'
 pkgname=ifcopenshell
-version=0.6.0b0
+version=0.6.0.git
 revision=1
 #archs="i686 x86_64"
 wrksrc="IfcOpenShell-${version}"
@@ -17,9 +17,9 @@ configure_args="
 -DPYTHON_LIBRARY=/usr/lib/libpython3.8.so
 -DLIBXML2_INCLUDE_DIR=/usr/include/libxml2
 -DLIBXML2_LIBRARIES=/usr/lib/libxml2.so
--DSWIG_DIR=/usr/share/swig/3.0.12
--DSWIG_EXECUTABLE=/bin/swig3
--DSWIG_VERSION=3.0.12
+-DSWIG_DIR=/usr/share/swig/4.0.1
+-DSWIG_EXECUTABLE=/bin/swig
+-DSWIG_VERSION=4.0.1
 ../cmake/
 "
 patch_args="-Np1"
@@ -31,13 +31,11 @@ short_desc="Open source ifc toolkit and geometry engine. Provides IfcConvert Ifc
 maintainer="Sander Boer <sanderboer@mauc.nl>"
 license="LGPL-v3.0"
 homepage="http://www.ifcopenshell.org/"
-distfiles="https://github.com/IfcOpenShell/IfcOpenShell/archive/v${version}.tar.gz"
-checksum=d4a9a28b715512659670f2a101bef64363df7808a64ed30e7019161caae6a914
+distfiles="https://github.com/sanderboer/IfcOpenShell/archive/v0.6.0.zip"
+checksum=9f143d6af311cebdabcbc25f2adfe554d86984d686f4ddcf81f9b76032c36893
 
 post_install(){
   vmkdir usr/share/blender/${_blenderversion}/scripts/addons_contrib
   vcopy src/ifcblender/* usr/share/blender/${_blenderversion}/scripts/addons_contrib/
   }
 
-# NOTE: ifcblender is patched to use system-wide installed ifcopenshell python bindings.
-# NOTE: Default is that the ifcopenshell module is copied into the ifcblender dir, which includes ELF binairies.
