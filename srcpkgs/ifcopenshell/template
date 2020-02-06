@@ -1,9 +1,10 @@
 # Template file for 'ifcopenshell'
 pkgname=ifcopenshell
 version=0.6.0.git
+_branch=0.6.0-swig4
 revision=1
 #archs="i686 x86_64"
-wrksrc="IfcOpenShell-${version}"
+wrksrc="IfcOpenShell-${_branch}"
 build_style=cmake
 _blenderversion=2.81a
 #create_wrksrc=yes
@@ -23,7 +24,7 @@ configure_args="
 ../cmake/
 "
 patch_args="-Np1"
-hostmakedepends="swig3"
+hostmakedepends="swig"
 makedepends="python3-devel boost-devel occt-devel icu-devel libxml2-devel opencollada-devel pcre-devel"
 depends="python3 boost occt libxml2 opencollada icu"
 
@@ -31,8 +32,8 @@ short_desc="Open source ifc toolkit and geometry engine. Provides IfcConvert Ifc
 maintainer="Sander Boer <sanderboer@mauc.nl>"
 license="LGPL-v3.0"
 homepage="http://www.ifcopenshell.org/"
-distfiles="https://github.com/sanderboer/IfcOpenShell/archive/v0.6.0.zip"
-checksum=9f143d6af311cebdabcbc25f2adfe554d86984d686f4ddcf81f9b76032c36893
+distfiles="https://github.com/sanderboer/IfcOpenShell/archive/v${_branch}.zip"
+checksum=f067a0a3515c7074ef906fb9f65748136a8b615c6c20ba6d0d573d2ef28c17bc
 
 post_install(){
   vmkdir usr/share/blender/${_blenderversion}/scripts/addons_contrib

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-
-xgensum -i srcpkgs/ifcopenshell/template
+xgensum -f -i srcpkgs/ifcopenshell/template
+./xbps-src clean ifcopenshell
 ./xbps-src -f -j4 pkg ifcopenshell
