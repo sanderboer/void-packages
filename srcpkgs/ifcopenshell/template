@@ -1,14 +1,14 @@
 # Template file for 'ifcopenshell'
 pkgname=ifcopenshell
-version=0.6.0b0
+version=0.6.0
 revision=1
 
 wrksrc="IfcOpenShell-${version}"
-distfiles="https://github.com/IfcOpenShell/IfcOpenShell/archive/v${version}.tar.gz"
-checksum=d4a9a28b715512659670f2a101bef64363df7808a64ed30e7019161caae6a914
+distfiles="https://github.com/sanderboer/IfcOpenShell/archive/v${version}-patched.tar.gz"
+checksum=43f958b41c07a692805dcddd6b7706fa1316cd58ac48d80de33bb145743b4afe
 
 build_style=cmake
-_blenderversion=2.81
+_blenderversion=2.82
 configure_args="
 -Wno-dev
 -DCMAKE_INSTALL_PREFIX=/usr
@@ -19,13 +19,10 @@ configure_args="
 -DPYTHON_LIBRARY=/usr/lib/libpython3.8.so
 -DLIBXML2_INCLUDE_DIR=/usr/include/libxml2
 -DLIBXML2_LIBRARIES=/usr/lib/libxml2.so
--DSWIG_DIR=/usr/share/swig/3.0.12
--DSWIG_EXECUTABLE=/bin/swig3
--DSWIG_VERSION=3.0.12
 ../cmake/
 "
 patch_args="-Np1"
-hostmakedepends="swig3"
+hostmakedepends="swig"
 makedepends="python3-devel boost-devel occt-devel icu-devel libxml2-devel opencollada-devel pcre-devel"
 depends="python3 boost occt libxml2 opencollada icu"
 
