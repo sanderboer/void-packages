@@ -1,8 +1,8 @@
-# Template file for 'freecad'
-pkgname=freecad
-version=0.18.4
-revision=4
-wrksrc="FreeCAD-${version}"
+# Template file for 'freecad-beta'
+pkgname=freecad-beta
+version=0.19
+revision=1
+wrksrc="FreeCAD-${version}_pre"
 build_style=cmake
 
 # CMAKE_INSTALL_LIBDIR by default doesn't use PREFIX, so we set it manually
@@ -12,6 +12,10 @@ configure_args="
  -DCMAKE_INSTALL_PREFIX=${_inst_prefix}
  -DCMAKE_INSTALL_LIBDIR=${_inst_prefix}/lib
  -DCMAKE_INSTALL_DATAROOTDIR=/usr/share
+ -DPYTHON_EXECUTABLE=/bin/python3
+ -DPYTHON_LIBRARIES=/usr/lib/libpython3.8.so
+ -DPYTHON_LIBPATH=/usr/lib/python3.8/
+ -DPYTHON_INCLUDE_DIRS=/usr/include/python3.8/
  -DMEDFILE_INCLUDE_DIRS=/usr/include/med"
 hostmakedepends="pkg-config swig doxygen graphviz"
 makedepends="python3-devel boost-devel libxerces-c-devel zlib-devel occt-devel
@@ -19,7 +23,7 @@ makedepends="python3-devel boost-devel libxerces-c-devel zlib-devel occt-devel
  coin3-devel libshiboken2-devel libspnav-devel pyside2-tools
  liblz4-devel libpyside2-python3-devel python3-matplotlib netcdf-devel
  jsoncpp-devel qt5-devel qt5-svg-devel qt5-tools-devel qt5-webkit-devel
- qt5-x11extras-devel coin3-doc glew-devel"
+ qt5-x11extras-devel qt5-xmlpatterns-devel coin3-doc glew-devel"
 
 case "$XBPS_TARGET_MACHINE" in
 	*-musl) # SIGSEGV with musl, see https://github.com/void-linux/void-packages/issues/12595
@@ -34,11 +38,11 @@ pycompile_version="$py3_ver"
 pycompile_dirs="usr/lib/${pkgname}/Mod usr/lib/${pkgname}/data/Mod"
 
 short_desc="General purpose 3D CAD modeler"
-maintainer="yopito <pierre.bourgin@free.fr>"
+maintainer="Sander Boer <sanderboer@mauc.nl>"
 license="LGPL-2.0-or-later"
 homepage="https://freecadweb.org/"
-distfiles="https://github.com/FreeCAD/FreeCAD/archive/${version}.tar.gz"
-checksum=4e0cce447b31b8989a00cf68c49ae012ce8e5546a56c6e0874fbd8f7ddedffd2
+distfiles="https://github.com/FreeCAD/FreeCAD/archive/${version}_pre.tar.gz"
+checksum=b16c17e83496ec34cd29ed208f4d6049984879ef953574dc3729a4be06e35b32
 
 post_extract() {
 	# Report exact minor version
@@ -56,6 +60,6 @@ post_install() {
 	# do not move binaries but symlink them instead.
 	vmkdir usr/bin
 	for f in FreeCAD FreeCADCmd; do
-		ln -s ${_inst_prefix}/bin/${f} ${DESTDIR}/usr/bin/${f}
+		ln -s ${_inst_prefix}/bin/${f} ${DESTDIR}/usr/bin/${f}_pre
 	done
 }

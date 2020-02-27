@@ -2,15 +2,18 @@
 pkgname=ifcopenshell
 version=0.6.0
 revision=1
+_blenderversion=2.82
 
-wrksrc="IfcOpenShell-${version}"
+#archs="i686 x86_64"
+build_style=cmake
+wrksrc="IfcOpenShell-${version}-patched"
 distfiles="https://github.com/sanderboer/IfcOpenShell/archive/v${version}-patched.tar.gz"
 checksum=43f958b41c07a692805dcddd6b7706fa1316cd58ac48d80de33bb145743b4afe
 
-build_style=cmake
-_blenderversion=2.82
 configure_args="
 -Wno-dev
+-DGLTF_SUPPORT=ON
+-Djson_hpp=/usr/include/nlohmann/json.hpp
 -DCMAKE_INSTALL_PREFIX=/usr
 -DOCC_INCLUDE_DIR=/usr/include/opencascade
 -Dgp_Pnt_hxx=/usr/include/opencascade/gp_Pnt.hxx
@@ -23,7 +26,7 @@ configure_args="
 "
 patch_args="-Np1"
 hostmakedepends="swig"
-makedepends="python3-devel boost-devel occt-devel icu-devel libxml2-devel opencollada-devel pcre-devel"
+makedepends="python3-devel boost-devel occt-devel icu-devel libxml2-devel opencollada-devel pcre-devel json-c++"
 depends="python3 boost occt libxml2 opencollada icu"
 
 short_desc="Open source ifc toolkit and geometry engine. Provides IfcConvert IfcGeomserver, ifcopenshell python bindings and blender ifc import addon"
