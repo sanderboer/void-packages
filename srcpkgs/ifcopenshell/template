@@ -1,0 +1,41 @@
+# Template file for 'ifcopenshell'
+pkgname=ifcopenshell
+version=0.6.0
+revision=1
+_blenderversion=2.81
+
+#archs="i686 x86_64"
+build_style=cmake
+wrksrc="IfcOpenShell-${version}-patched"
+distfiles="https://github.com/sanderboer/IfcOpenShell/archive/v${version}-patched.tar.gz"
+checksum=eea3a62d951228d5e89f11374167858b5ff3dcd369de1c1cf46499325ccdc8ef
+
+configure_args="
+-Wno-dev
+-DGLTF_SUPPORT=ON
+-Djson_hpp=/usr/include/nlohmann/json.hpp
+-DCMAKE_INSTALL_PREFIX=/usr
+-DOCC_INCLUDE_DIR=/usr/include/opencascade
+-Dgp_Pnt_hxx=/usr/include/opencascade/gp_Pnt.hxx
+-DPYTHON_INCLUDE_DIR=/usr/include/python3.8
+-DPYTHON_EXECUTABLE=/bin/python3
+-DPYTHON_LIBRARY=/usr/lib/libpython3.8.so
+-DLIBXML2_INCLUDE_DIR=/usr/include/libxml2
+-DLIBXML2_LIBRARIES=/usr/lib/libxml2.so
+../cmake/
+"
+patch_args="-Np1"
+hostmakedepends="swig"
+makedepends="python3-devel boost-devel occt-devel icu-devel libxml2-devel opencollada-devel pcre-devel json-c++"
+depends="python3 boost occt libxml2 opencollada icu"
+
+short_desc="Open source ifc toolkit and geometry engine. Provides IfcConvert IfcGeomserver, ifcopenshell python bindings and blender ifc import addon"
+maintainer="Sander Boer <sanderboer@mauc.nl>"
+license="LGPL-v3.0"
+homepage="http://www.ifcopenshell.org/"
+
+post_install(){
+  vmkdir usr/share/blender/${_blenderversion}/scripts/addons_contrib
+  vcopy src/ifcblender/* usr/share/blender/${_blenderversion}/scripts/addons_contrib/
+  }
+

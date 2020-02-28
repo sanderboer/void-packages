@@ -1,0 +1,20 @@
+# Template file for 'ifcplusplus'
+pkgname=ifcplusplus
+version=1dfaa27
+revision=1
+wrksrc="ifcplusplus-1dfaa27cb99f7727d556225011c69c9f2f379395"
+build_style=cmake
+#configure_args=""
+hostmakedepends=""
+makedepends="qt5-devel osg-devel boost-devel"
+depends="qt5 osg boost"
+short_desc="Open source IFC C++ class model, as well as a reader and writer and a simple IFC viewer."
+maintainer="Sander Boer <sanderboer@mauc.nl>"
+license="MIT"
+homepage=" http://www.ifcquery.com"
+distfiles="https://github.com/ifcquery/ifcplusplus/archive/1dfaa27.zip"
+checksum=853767c66daf1941e92836c1b92cb4a8fc6726d5a7d3989b55cc11395afd1316
+
+# NOTE:
+# No versioning scheme in upstream ifcplusplus, posted an issue for it
+# If they start tagging, use that, otherwise copy another major distro's scheme.

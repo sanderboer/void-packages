@@ -1,0 +1,15 @@
+# Template file for 'pythonocc'
+pkgname=python3-pythonocc-core
+version=7.4.0rc1
+revision=1
+wrksrc="pythonocc-core-${version}"
+build_style=cmake
+hostmakedepends="swig"
+makedepends="occt-devel python3-devel"
+depends="occt"
+short_desc="Opencascade bindings for python3"
+maintainer="Sander Boer <sanderboer@mauc.nl>"
+license="LGPL-v3.0"
+homepage="http://www.pythonocc.org"
+distfiles="https://github.com/tpaviot/pythonocc-core/archive/${version}.tar.gz"
+checksum=9ee383abc6091b1aff7937252b1d447d400ab444cc172792e9dc991057f44431
